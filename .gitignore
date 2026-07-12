@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# AgentCore CLI
+.cache/
+.cli/
+cdk.out/
+
+# Environment
+.env
+.env.local
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# AgentCore init scaffold (regenerable)
+VroomDash/
+
+# Lambda zip artifacts
+*.zip
+.omni/
+.claude/
+.github/
+.cursor/
+.kiro/
+.agents/
+
+# AgentCore: generated or local-only files (sources in agentcore/ are committed)
+agentcore/agentcore.json
+agentcore/aws-targets.json
+agentcore/.cli/
+agentcore/.cache/
+agentcore/.llm-context/
+agentcore/.env.local
+agentcore/cdk/node_modules/
+agentcore/cdk/cdk.out/
+agentcore/cdk/dist/
+agentcore/cdk/.cdk.staging/

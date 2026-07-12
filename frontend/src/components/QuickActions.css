@@ -1,0 +1,65 @@
+.quick-actions {
+  padding: 0 20px 12px;
+  flex-shrink: 0;
+}
+
+.quick-actions-title {
+  font-size: 13px;
+  color: #B0A090;
+  font-weight: 500;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.quick-action-btn {
+  background: white;
+  border: 1px solid #FEE8D6;
+  border-radius: 14px;
+  padding: 12px 14px;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: all 0.2s;
+}
+
+.quick-action-btn:hover {
+  border-color: #FF6B35;
+  background: #FFF8F0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.1);
+}
+
+.quick-action-btn:active {
+  transform: translateY(0);
+}
+
+.quick-action-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.quick-action-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
+}
+
+.quick-action-example {
+  font-size: 11.5px;
+  color: #B0A090;
+  line-height: 1.3;
+}
+
+@media (max-width: 480px) {
+  .quick-actions-grid {
+    grid-template-columns: 1fr;
+  }
+}

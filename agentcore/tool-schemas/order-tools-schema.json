@@ -1,0 +1,48 @@
+[
+  {
+    "name": "lookup_order",
+    "description": "주문 정보를 조회합니다. 주문 상태, 상품명, 결제금액, 배송 정보를 반환합니다.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "order_id": {
+          "type": "string",
+          "description": "조회할 주문 ID"
+        }
+      },
+      "required": ["order_id"]
+    }
+  },
+  {
+    "name": "track_delivery",
+    "description": "배송 상태를 추적합니다. 배송 상태, 현재 위치, 택배사, 예상 도착일을 반환합니다.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "order_id": {
+          "type": "string",
+          "description": "배송 추적할 주문 ID"
+        }
+      },
+      "required": ["order_id"]
+    }
+  },
+  {
+    "name": "request_return",
+    "description": "반품을 접수합니다. 반품 접수 확인 및 절차를 안내합니다.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "order_id": {
+          "type": "string",
+          "description": "반품할 주문 ID"
+        },
+        "reason": {
+          "type": "string",
+          "description": "반품 사유"
+        }
+      },
+      "required": ["order_id", "reason"]
+    }
+  }
+]

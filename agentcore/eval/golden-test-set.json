@@ -1,0 +1,288 @@
+{
+  "description": "Vroom&Dash 골든 테스트 셋 — REQUIREMENTS.md 기반 평가 시나리오",
+  "version": "1.0",
+  "scenarios": [
+    {
+      "scenario_id": "order-lookup-001",
+      "category": "주문 조회",
+      "turns": [
+        {
+          "input": "주문번호 ORD-001 조회해줘",
+          "expected_response": "주문 상태, 상품명, 결제 금액, 배송 정보를 포함한 주문 상세 정보를 안내해야 합니다."
+        }
+      ],
+      "expected_trajectory": ["lookup_order"],
+      "assertions": [
+        "Agent called lookup_order with order_id=ORD-001",
+        "Response includes order status",
+        "Response includes product name and price"
+      ]
+    },
+    {
+      "scenario_id": "order-lookup-002",
+      "category": "주문 조회",
+      "turns": [
+        {
+          "input": "내 주문 어디까지 왔어?",
+          "expected_response": "주문번호를 요청하거나, 고객 정보를 통해 최근 주문을 조회해야 합니다."
+        }
+      ],
+      "expected_trajectory": [],
+      "assertions": [
+        "Agent asks for order number or customer identification",
+        "Agent does not hallucinate an order number"
+      ]
+    },
+    {
+      "scenario_id": "order-tracking-003",
+      "category": "주문 조회",
+      "turns": [
+        {
+          "input": "ORD-003 배송 상태 확인해줘",
+          "expected_response": "배송 상태, 현재 위치, 택배사, 예상 도착일을 포함한 배송 추적 정보를 안내해야 합니다."
+        }
+      ],
+      "expected_trajectory": ["track_delivery"],
+      "assertions": [
+        "Agent called track_delivery with order_id=ORD-003",
+        "Response includes delivery status and estimated arrival"
+      ]
+    },
+    {
+      "scenario_id": "order-combined-004",
+      "category": "주문 조회",
+      "turns": [
+        {
+          "input": "ORD-005 주문 상태랑 배송 현황 둘 다 알려줘",
+          "expected_response": "주문 정보와 배송 추적 정보를 모두 포함하여 안내해야 합니다."
+        }
+      ],
+      "expected_trajectory": ["lookup_order", "track_delivery"],
+      "assertions": [
+        "Agent called both lookup_order and track_delivery",
+        "Response includes both order details and delivery tracking info"
+      ]
+    },
+    {
+      "scenario_id": "product-recommend-010",
+      "category": "상품 추천",
+      "turns": [
+        {
+          "input": "5살 아이한테 맞는 RC카 추천해줘",
+          "expected_response": "5세에 적합한 RC카 2~3개를 추천하며, 각 상품의 추천 이유를 설명해야 합니다."
+        }
+      ],
+      "expected_trajectory": ["recommend_products"],
+      "assertions": [
+        "Agent called recommend_products with age parameter around 5",
+        "Response includes at least 2 product recommendations",
+        "Response explains why each product is suitable for a 5-year-old"
+      ]
+    },
+    {
+      "scenario_id": "product-search-011",
+      "category": "상품 추천",
+      "turns": [
+        {
+          "input": "3만원 이하 드리프트카 있어?",
+          "expected_response": "가격 필터를 적용한 드리프트카 검색 결과를 안내해야 합니다."
+        }
+      ],
+      "expected_trajectory": ["search_products"],
+      "assertions": [
+        "Agent called search_products with query about drift car and max_price around 30000",
+        "Response only shows products within budget"
+      ]
+    },
+    {
+      "scenario_id": "product-detail-012",
+      "category": "상품 추천",
+      "turns": [
+        {
+          "input": "PROD-001 상품 상세 정보 알려줘",
+          "expected_response": "상품 스펙, 가격, 재고 상태, 상세 설명을 포함한 정보를 안내해야 합니다."
+        }
+      ],
+      "expected_trajectory": ["get_product_detail"],
+      "assertions": [
+        "Agent called get_product_detail with product_id=PROD-001",
+        "Response includes price, specifications, and availability"
+      ]
+    },
+    {
+      "scenario_id": "product-budget-013",
+      "category": "상품 추천",
+      "turns": [
+        {
+          "input": "7살 아이 생일선물로 5만원 예산에 맞는 장난감 자동차 추천해줘",
+          "expected_response": "7세 적합, 5만원 이하의 장난감 자동차를 추천하며 생일 선물로 적합한 이유를 설명해야 합니다."
+        }
+      ],
+      "expected_trajectory": ["recommend_products"],
+      "assertions": [
+        "Agent called recommend_products with age=7 and budget=50000",
+        "All recommended products are within 50000 KRW budget",
+        "Response explains gift suitability"
+      ]
+    },
+    {
+      "scenario_id": "tech-support-020",
+      "category": "기술 지원",
+      "turns": [
+        {
+          "input": "리모컨이 안 돼요",
+          "expected_response": "상품 확인 후 리모컨 페어링/연결 가이드를 단계별로 안내해야 합니다."
+        }
+      ],
+      "expected_trajectory": ["get_tech_guide"],
+      "assertions": [
+        "Agent called get_tech_guide with query about remote control issue",
+        "Response includes step-by-step troubleshooting instructions"
+      ]
+    },
+    {
+      "scenario_id": "tech-support-021",
+      "category": "기술 지원",
+      "turns": [
+        {
+          "input": "RC카 배터리가 금방 닳아요. 충전 방법 알려주세요",
+          "expected_response": "배터리 충전 방법과 배터리 수명 관리 팁을 안내해야 합니다."
+        }
+      ],
+      "expected_trajectory": ["get_tech_guide"],
+      "assertions": [
+        "Agent called get_tech_guide with query about battery charging",
+        "Response includes charging instructions",
+        "Response includes battery maintenance tips"
+      ]
+    },
+    {
+      "scenario_id": "tech-support-022",
+      "category": "기술 지원",
+      "turns": [
+        {
+          "input": "조립키트 모터가 안 돌아가요",
+          "expected_response": "모터 고장 진단 및 해결 가이드를 안내해야 합니다."
+        }
+      ],
+      "expected_trajectory": ["get_tech_guide"],
+      "assertions": [
+        "Agent called get_tech_guide with query about motor issue",
+        "Response includes diagnostic steps for motor problems"
+      ]
+    },
+    {
+      "scenario_id": "return-basic-030",
+      "category": "반품/교환",
+      "turns": [
+        {
+          "input": "ORD-002 반품하고 싶어요. 아이가 생각보다 안 좋아해요",
+          "expected_response": "반품 접수를 진행하고, 반품 절차와 환불 안내를 해야 합니다."
+        }
+      ],
+      "expected_trajectory": ["request_return"],
+      "assertions": [
+        "Agent called request_return with order_id=ORD-002 and a reason",
+        "Response confirms return request submission",
+        "Response explains return procedure and refund timeline"
+      ]
+    },
+    {
+      "scenario_id": "return-inquiry-031",
+      "category": "반품/교환",
+      "turns": [
+        {
+          "input": "반품 절차가 어떻게 되나요?",
+          "expected_response": "일반적인 반품 절차, 조건, 기한을 안내해야 합니다."
+        }
+      ],
+      "expected_trajectory": [],
+      "assertions": [
+        "Response explains general return policy",
+        "Response mentions return conditions and deadlines"
+      ]
+    },
+    {
+      "scenario_id": "return-with-lookup-032",
+      "category": "반품/교환",
+      "turns": [
+        {
+          "input": "ORD-004 주문을 확인하고 반품 처리해줘. 불량이에요",
+          "expected_response": "주문 조회 후 반품 접수를 진행하고, 불량 반품 절차를 안내해야 합니다."
+        }
+      ],
+      "expected_trajectory": ["lookup_order", "request_return"],
+      "assertions": [
+        "Agent called lookup_order with order_id=ORD-004",
+        "Agent called request_return with order_id=ORD-004 and defect-related reason",
+        "Response includes order details and return confirmation"
+      ]
+    },
+    {
+      "scenario_id": "multi-turn-040",
+      "category": "복합 시나리오",
+      "turns": [
+        {
+          "input": "8살 아이 선물 뭐가 좋을까요?",
+          "expected_response": "8세에 적합한 상품을 추천하며, 선물로 적합한 이유를 설명해야 합니다."
+        },
+        {
+          "input": "첫 번째 추천 상품 상세 정보 보여줘",
+          "expected_response": "이전 추천에서 첫 번째 상품의 상세 정보를 조회하여 안내해야 합니다."
+        }
+      ],
+      "expected_trajectory": ["recommend_products", "get_product_detail"],
+      "assertions": [
+        "First turn: Agent recommends products for 8-year-old",
+        "Second turn: Agent recalls the first recommended product and fetches its details"
+      ]
+    },
+    {
+      "scenario_id": "edge-invalid-order-050",
+      "category": "엣지 케이스",
+      "turns": [
+        {
+          "input": "주문번호 INVALID-999 조회해줘",
+          "expected_response": "주문을 찾을 수 없다는 안내와 함께 올바른 주문번호 확인을 요청해야 합니다."
+        }
+      ],
+      "expected_trajectory": ["lookup_order"],
+      "assertions": [
+        "Agent called lookup_order with order_id=INVALID-999",
+        "Response gracefully handles not-found case",
+        "Response suggests checking the order number"
+      ]
+    },
+    {
+      "scenario_id": "edge-out-of-scope-051",
+      "category": "엣지 케이스",
+      "turns": [
+        {
+          "input": "요즘 주식 뭐 사면 좋을까요?",
+          "expected_response": "Vroom&Dash 서비스 범위 밖의 질문임을 안내하고, 도움 가능한 영역을 소개해야 합니다."
+        }
+      ],
+      "expected_trajectory": [],
+      "assertions": [
+        "Agent does not attempt to answer stock market questions",
+        "Agent politely redirects to toy car shop services"
+      ]
+    },
+    {
+      "scenario_id": "edge-korean-informal-052",
+      "category": "엣지 케이스",
+      "turns": [
+        {
+          "input": "야 RC카 뭐 사야됨? ㅋㅋ 걍 싼거",
+          "expected_response": "비격식 한국어를 이해하고 적절한 저가 RC카를 추천하되, 친절한 톤을 유지해야 합니다."
+        }
+      ],
+      "expected_trajectory": ["search_products"],
+      "assertions": [
+        "Agent understands informal Korean",
+        "Agent searches for affordable RC cars",
+        "Agent maintains professional but friendly tone"
+      ]
+    }
+  ]
+}

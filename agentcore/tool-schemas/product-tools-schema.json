@@ -1,0 +1,67 @@
+[
+  {
+    "name": "search_products",
+    "description": "상품을 검색합니다. 검색어, 카테고리, 연령대, 가격 필터로 상품 목록을 반환합니다.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "검색어"
+        },
+        "category": {
+          "type": "string",
+          "description": "상품 카테고리 (선택)"
+        },
+        "min_age": {
+          "type": "integer",
+          "description": "최소 권장 연령 (선택)"
+        },
+        "max_price": {
+          "type": "integer",
+          "description": "최대 가격 (선택)"
+        }
+      },
+      "required": ["query"]
+    }
+  },
+  {
+    "name": "get_product_detail",
+    "description": "상품 상세 정보를 조회합니다. 스펙, 가격, 재고, 설명을 반환합니다.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "description": "상품 ID"
+        }
+      },
+      "required": ["product_id"]
+    }
+  },
+  {
+    "name": "recommend_products",
+    "description": "맞춤형 상품을 추천합니다. 연령, 예산, 카테고리, 선호도에 따라 추천 상품 목록과 추천 사유를 반환합니다.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": "integer",
+          "description": "사용자 연령 (선택)"
+        },
+        "budget": {
+          "type": "integer",
+          "description": "예산 (선택)"
+        },
+        "category": {
+          "type": "string",
+          "description": "선호 카테고리 (선택)"
+        },
+        "preference": {
+          "type": "string",
+          "description": "기타 선호 사항 (선택)"
+        }
+      }
+    }
+  }
+]

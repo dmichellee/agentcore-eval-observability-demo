@@ -1,0 +1,35 @@
+{
+  "llmAsAJudge": {
+    "model": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "instructions": "You are evaluating the ACCURACY of a customer service assistant for Vroom&Dash, a Korean toy car online shop.\n\nThe assistant helps customers with: order inquiries, product recommendations, tech support for toy cars, and returns/exchanges.\n\nEvaluate whether the assistant's response is factually accurate based on the tool results and context provided.\n\nContext (tool calls and results):\n{context}\n\nAssistant's Response:\n{assistant_turn}\n\nEvaluation Criteria:\n1. Do the facts in the response match the tool results exactly? (order status, prices, product names, shipping info)\n2. Are there any hallucinated or fabricated details not present in the tool results?\n3. Are numerical values (prices, dates, quantities) correctly cited?\n4. For tech support, does the guidance match the knowledge base content?\n5. Are Korean-language details (product names, status labels) accurately reflected?\n\nProvide your rating based on how accurately the response reflects the actual data from tool calls.",
+    "ratingScale": {
+      "numerical": [
+        {
+          "value": 5,
+          "label": "Excellent",
+          "definition": "All facts perfectly match tool results. No hallucinated details. Numbers, dates, and names are all correct."
+        },
+        {
+          "value": 4,
+          "label": "Good",
+          "definition": "Facts are mostly accurate with minor imprecisions (e.g., slightly rephrased product name) but no incorrect information."
+        },
+        {
+          "value": 3,
+          "label": "Acceptable",
+          "definition": "Core facts are correct but some details are missing or slightly inaccurate. No critical errors."
+        },
+        {
+          "value": 2,
+          "label": "Poor",
+          "definition": "Contains factual errors that could mislead the customer (wrong price, wrong order status, incorrect product info)."
+        },
+        {
+          "value": 1,
+          "label": "Very Poor",
+          "definition": "Response contains significant fabrications or contradicts the tool results. Fundamentally inaccurate."
+        }
+      ]
+    }
+  }
+}
